@@ -1,0 +1,237 @@
+@import "tailwindcss";
+
+@theme {
+  /* ── Cyberpunk Color System ─────────────────────────────── */
+  --color-base:     #050911;   /* deep space black-blue        */
+  --color-stable:   #00E5C8;   /* electric cyan                */
+  --color-alert:    #A855F7;   /* vivid purple                 */
+  --color-critical: #FF2D6B;   /* hot magenta-red              */
+  --color-readout:  #E8F8F5;   /* ice white                    */
+  --color-gold:     #F59E0B;   /* amber — watch state          */
+  --color-panel:    #0A1020;   /* panel bg                     */
+}
+
+/* ── Base Resets ───────────────────────────────────────────── */
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #050911;
+  color: #E8F8F5;
+  font-family: 'Rajdhani', 'Segoe UI', sans-serif;
+  overflow: hidden;
+}
+
+/* ── Typography System ─────────────────────────────────────── */
+/* Orbitron → display headings, NEXUS logo, panel titles */
+.font-display {
+  font-family: 'Orbitron', 'Rajdhani', sans-serif;
+  letter-spacing: 0.08em;
+}
+
+/* Share Tech Mono → all monospace data readouts */
+.font-mono {
+  font-family: 'Share Tech Mono', 'JetBrains Mono', monospace;
+}
+
+/* Rajdhani → body, labels, secondary text */
+.font-body {
+  font-family: 'Rajdhani', sans-serif;
+}
+
+/* ── HUD Grid Overlay ──────────────────────────────────────── */
+.hud-grid {
+  background-image:
+    linear-gradient(rgba(0, 229, 200, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 229, 200, 0.025) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.hud-scanlines::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0, 0, 0, 0.12) 3px,
+    rgba(0, 0, 0, 0.12) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Custom Scrollbar ──────────────────────────────────────── */
+::-webkit-scrollbar        { width: 3px; height: 3px; }
+::-webkit-scrollbar-track  { background: rgba(5, 9, 17, 0.9); }
+::-webkit-scrollbar-thumb  { background: rgba(168, 85, 247, 0.25); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(168, 85, 247, 0.5); }
+
+/* ── Glow Borders ──────────────────────────────────────────── */
+.glow-border-stable {
+  box-shadow: 0 0 12px rgba(0, 229, 200, 0.12), inset 0 0 8px rgba(0, 229, 200, 0.04);
+  border: 1px solid rgba(0, 229, 200, 0.22);
+}
+.glow-border-alert {
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.12), inset 0 0 8px rgba(168, 85, 247, 0.04);
+  border: 1px solid rgba(168, 85, 247, 0.22);
+}
+.glow-border-critical {
+  box-shadow: 0 0 14px rgba(255, 45, 107, 0.2), inset 0 0 8px rgba(255, 45, 107, 0.06);
+  border: 1px solid rgba(255, 45, 107, 0.3);
+}
+.glow-border-emergence {
+  box-shadow:
+    0 0 12px rgba(168, 85, 247, 0.18),
+    0 0 12px rgba(0, 229, 200, 0.18),
+    inset 0 0 8px rgba(168, 85, 247, 0.06);
+  border: 1px dashed rgba(168, 85, 247, 0.45);
+}
+
+/* ── Text Glows ────────────────────────────────────────────── */
+.text-glow-stable    { text-shadow: 0 0 10px rgba(0, 229, 200, 0.7); }
+.text-glow-alert     { text-shadow: 0 0 10px rgba(168, 85, 247, 0.7); }
+.text-glow-critical  { text-shadow: 0 0 10px rgba(255, 45, 107, 0.8); }
+.text-glow-gold      { text-shadow: 0 0 10px rgba(245, 158, 11, 0.7); }
+.text-glow-emergence {
+  text-shadow:
+    0 0 10px rgba(168, 85, 247, 0.55),
+    0 0 10px rgba(0, 229, 200, 0.55);
+}
+
+/* ── Radial Glow BGs ───────────────────────────────────────── */
+.glow-bg-stable    { background: radial-gradient(circle at center, rgba(0, 229, 200, 0.1) 0%, transparent 70%); }
+.glow-bg-alert     { background: radial-gradient(circle at center, rgba(168, 85, 247, 0.1) 0%, transparent 70%); }
+.glow-bg-critical  { background: radial-gradient(circle at center, rgba(255, 45, 107, 0.12) 0%, transparent 70%); }
+.glow-bg-emergence { background: radial-gradient(circle at center, rgba(168, 85, 247, 0.08) 0%, rgba(0, 229, 200, 0.08) 50%, transparent 75%); }
+
+/* ── Noise texture overlay ─────────────────────────────────── */
+.noise-bg {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.025'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px;
+  opacity: 0.4;
+}
+
+/* ── Panel card base ───────────────────────────────────────── */
+.panel-card {
+  background: linear-gradient(135deg, rgba(10, 16, 32, 0.9) 0%, rgba(5, 9, 17, 0.95) 100%);
+  border: 1px solid rgba(0, 229, 200, 0.12);
+  border-radius: 4px;
+}
+
+/* ── Animations ────────────────────────────────────────────── */
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.35; }
+  50%       { opacity: 0.8; }
+}
+.pulse-slow { animation: pulse-slow 3s infinite ease-in-out; }
+
+@keyframes glitch-blink {
+  0%, 100% { opacity: 1; filter: hue-rotate(0deg); }
+  31% { opacity: 1; }
+  32% { opacity: 0.2; }
+  33% { opacity: 1; }
+  37% { opacity: 1; }
+  38% { opacity: 0.15; }
+  39% { opacity: 0.85; }
+  40% { opacity: 1; }
+  44% { opacity: 1; }
+  45% { opacity: 0.3; }
+  46% { opacity: 0.1; }
+  47% { opacity: 1; }
+  78% { opacity: 1; }
+  79% { opacity: 0.4; }
+  80% { opacity: 1; }
+  88% { opacity: 1; }
+  89% { opacity: 0.25; filter: hue-rotate(90deg); }
+  90% { opacity: 0.9; }
+  91% { opacity: 1; filter: hue-rotate(0deg); }
+}
+.flicker {
+  animation: glitch-blink 3.5s infinite;
+}
+
+/* ── Font utilities ────────────────────────────────────────── */
+/* Audiowide — alien title font for NEXUS branding */
+.font-alien {
+  font-family: 'Audiowide', 'Orbitron', sans-serif;
+  letter-spacing: 0.18em;
+}
+
+/* ── Full-Page Glitch-Break Transition Animation ────────────── */
+@keyframes page-glitch {
+  0% {
+    filter: none;
+    transform: none;
+    opacity: 1;
+  }
+  8% {
+    filter: hue-rotate(90deg) saturate(1.8) contrast(1.2);
+    transform: translate(-8px, 4px) skewX(4deg);
+    clip-path: inset(10% 0 85% 0);
+  }
+  15% {
+    filter: invert(0.9) hue-rotate(180deg);
+    transform: translate(6px, -6px);
+    clip-path: inset(55% 0 15% 0);
+  }
+  22% {
+    filter: none;
+    transform: none;
+    clip-path: none;
+    opacity: 1;
+  }
+  30% {
+    filter: brightness(2.2);
+    transform: translate(-4px, -4px);
+    opacity: 0.7;
+  }
+  36% {
+    opacity: 0.12;
+    filter: hue-rotate(-50deg);
+  }
+  45% {
+    opacity: 1;
+    filter: contrast(3.5) saturate(0);
+    transform: translate(10px, 10px) skewX(-8deg);
+    clip-path: inset(25% 0 45% 0);
+  }
+  52% {
+    filter: none;
+    transform: none;
+    clip-path: none;
+  }
+  65% {
+    opacity: 0.25;
+    filter: brightness(0.15);
+  }
+  75% {
+    filter: hue-rotate(120deg) saturate(2);
+    transform: translate(-12px, 8px);
+    clip-path: inset(5% 0 65% 0);
+  }
+  85% {
+    opacity: 0.9;
+    filter: none;
+    transform: none;
+    clip-path: none;
+  }
+  92% {
+    opacity: 0.05;
+    filter: brightness(3.5);
+  }
+  100% {
+    opacity: 0;
+    filter: blur(10px);
+    transform: scale(0.96);
+  }
+}
+
+.page-glitch-active {
+  animation: page-glitch 480ms steps(1, end) forwards;
+  pointer-events: none;
+}
+
