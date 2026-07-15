@@ -207,10 +207,10 @@ export default function App() {
                   <AnimatePresence mode="wait">
                     {activeTab === 'console' && (
                       <motion.div
-                        key="console-tab"
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -6 }}
+                        key={`console-tab-${selectedHost.id}`}
+                        initial={{ opacity: 0, y: 10, filter: 'blur(2px)' }}
+                        animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                        exit={{ opacity: 0, y: -6, filter: 'blur(2px)' }}
                         transition={{ duration: 0.28, ease: EASE_OUT }}
                         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
                       >
@@ -259,10 +259,10 @@ export default function App() {
 
                     {activeTab === 'genome' && (
                       <motion.div
-                        key="genome-tab"
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -6 }}
+                        key={`genome-tab-${selectedHost.id}`}
+                        initial={{ opacity: 0, y: 10, filter: 'blur(2px)' }}
+                        animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                        exit={{ opacity: 0, y: -6, filter: 'blur(2px)' }}
                         transition={{ duration: 0.28, ease: EASE_OUT }}
                         className="panel-card p-4 glow-border-alert h-[500px]"
                       >
@@ -276,10 +276,10 @@ export default function App() {
 
                     {activeTab === 'interior' && (
                       <motion.div
-                        key="interior-tab"
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -6 }}
+                        key={`interior-tab-${selectedHost.id}`}
+                        initial={{ opacity: 0, y: 10, filter: 'blur(2px)' }}
+                        animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                        exit={{ opacity: 0, y: -6, filter: 'blur(2px)' }}
                         transition={{ duration: 0.28, ease: EASE_OUT }}
                         className="h-[500px]"
                       >
